@@ -8,6 +8,18 @@ dependencies:
 
 test:
   override:
+    - echo $CI
+    - echo $CIRCLECI
+    - echo $CIRCLE_BRANCH
+    - echo $CIRCLE_BUILD_NUM
+    - echo $CIRCLE_NODE_INDEX
+    - echo $CIRCLE_PROJECT_REPONAME
+    - echo $CIRCLE_PROJECT_USERNAME
+    - echo $CIRCLE_REPOSITORY_URL
+    - echo $CIRCLE_PR_NUMBER
+    - echo $CIRCLE_PULL_REQUEST
+    - echo $CI_PULL_REQUEST
+    - echo $CIRCLE_SHA1
     - tests/test
 
 # deployment:
