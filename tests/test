@@ -234,6 +234,23 @@ function assertURL () {
     assertTrue 'Expected output differs.' $?
 }
 
+function test_circle () {
+    reset
+    export CI="true"
+    export CIRCLECI="true"
+    export CIRCLE_BRANCH="master"
+    export CIRCLE_BUILD_NUM="33116958"
+    export CIRCLE_NODE_INDEX="0"
+    export CIRCLE_PROJECT_REPONAME="ci-repo"
+    export CIRCLE_PROJECT_USERNAME="codecov"
+    export CIRCLE_REPORISTORY_URL="https://github.com/codecov/ci-repo"
+    export CIRCLE_PR_NUMBER=""
+    export CIRCLE_SHA1="c739768fcac68144a3a6d82305b9c4106934d31a"
+    export CIRCLE_ARTIFACTS="/build/artifacts"
+    export CIRCLE_TEST_REPORTS="/test/reports"
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=master&commit=c739768fcac68144a3a6d82305b9c4106934d31a&build=4.1&build_url=&name=&tag=&slug=codecov%2Fci-repo&yaml=&service=travis&flags=&pr=false&job=33116958"
+}
+
 function test_travis () {
     reset
     export CI="true"
