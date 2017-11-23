@@ -61,21 +61,21 @@ function test_fixes () {
 function test_url_opt () {
     reset
     res=$(./codecov -d -u http://example.com | grep "http://example.com/")
-    diff <(echo "http://example.com/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
+    diff <(echo "http://example.com/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
     assertTrue 'Expected output differs.' $?
 }
 
 function test_url_env () {
     reset
     res=$(CODECOV_URL="http://other.com" ./codecov -d | grep "http://other.com/")
-    diff <(echo "http://other.com/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
+    diff <(echo "http://other.com/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
     assertTrue 'Expected output differs.' $?
 }
 
 function test_flags_opt () {
     reset
     res=$(./codecov -d -F f1 -F f2 | grep "https://codecov.io/")
-    diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=&flags=f1,f2&pr=&job=") <(echo "$res")
+    diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=&flags=f1,f2&pr=&job=") <(echo "$res")
     assertTrue 'Expected output differs.' $?
 }
 
@@ -97,14 +97,14 @@ function test_flags_opt () {
 #   token: uuid
 # ' > tests/.codecov.yml
 #     res=$(./codecov -d | grep "https://codecov.io/")
-#     diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=uuid&branch=$_BRANCH&commit=$_SHA&build=&build_url=&tag=&slug=codecov%2Fcodecov-bash&yaml=tests%2F.codecov.yml&service=&flags=&pr=&job=") <(echo "$res")
+#     diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=uuid&branch=$_BRANCH&commit=$_SHA&build=&build_url=&tag=&slug=circleci%2Fcodecov-bash&yaml=tests%2F.codecov.yml&service=&flags=&pr=&job=") <(echo "$res")
 #     assertTrue 'Expected output differs.' $?
 # }
 
 function test_build_arg () {
     reset
     res=$(./codecov -d -b 1.6 | grep "https://codecov.io/")
-    diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=$_SHA&build=1.6&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
+    diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=$_SHA&build=1.6&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
     assertTrue 'Expected output differs.' $?
 }
 
@@ -112,7 +112,7 @@ function test_build_arg () {
 #     reset
 #     git commit --amend -m 'Merge 5d4123bcb99dd1bc9b5ae8b4271b39dbe4c3928b into 2f85ca252d69d6c52484f0c4b2e8500498228398'
 #     res=$(./codecov -d -b 1.6 | grep "https://codecov.io/")
-#     diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=5d4123bcb99dd1bc9b5ae8b4271b39dbe4c3928b&build=&build_url=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
+#     diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=$_BRANCH&commit=5d4123bcb99dd1bc9b5ae8b4271b39dbe4c3928b&build=&build_url=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
 #     assertTrue 'Expected output differs.' $?
 # }
 
@@ -198,14 +198,14 @@ function test_token_opt () {
     reset
     token="38cd42da-4df4-4760-a998-4ebeca536904"
     res=$(./codecov -d -t "$token" | grep "https://codecov.io/")
-    diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=$token&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
+    diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=$token&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
     assertTrue 'Expected output differs.' $?
 }
 
 function test_token_env () {
     reset
     res=$(CODECOV_TOKEN="38cd42da-4df4-4760-a998-4ebeca536904" ./codecov -d | grep "https://codecov.io/")
-    diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=$token&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
+    diff <(echo "https://codecov.io/upload/v4?package=bash-tbd&token=$token&branch=$_BRANCH&commit=$_SHA&build=&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=&flags=&pr=&job=") <(echo "$res")
     assertTrue 'Expected output differs.' $?
 }
 
@@ -248,7 +248,7 @@ function test_circle () {
     export CIRCLE_SHA1="c739768fcac68144a3a6d82305b9c4106934d31a"
     export CIRCLE_ARTIFACTS="/build/artifacts"
     export CIRCLE_TEST_REPORTS="/test/reports"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=master&commit=c739768fcac68144a3a6d82305b9c4106934d31a&build=4.1&build_url=&name=&tag=&slug=codecov%2Fci-repo&yaml=&service=travis&flags=&pr=false&job=33116958"
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=master&commit=c739768fcac68144a3a6d82305b9c4106934d31a&build=4.1&build_url=&name=&tag=&slug=circleci%2Fci-repo&yaml=&service=travis&flags=&pr=false&job=33116958"
 }
 
 function test_travis () {
@@ -262,7 +262,7 @@ function test_travis () {
     export TRAVIS_JOB_ID="33116958"
     export TRAVIS_PULL_REQUEST="false"
     export TRAVIS_JOB_NUMBER="4.1"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=master&commit=c739768fcac68144a3a6d82305b9c4106934d31a&build=4.1&build_url=&name=&tag=&slug=codecov%2Fci-repo&yaml=&service=travis&flags=&pr=false&job=33116958"
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=master&commit=c739768fcac68144a3a6d82305b9c4106934d31a&build=4.1&build_url=&name=&tag=&slug=circleci%2Fci-repo&yaml=&service=travis&flags=&pr=false&job=33116958"
 }
 
 function test_jenkins (){
@@ -273,7 +273,7 @@ function test_jenkins (){
     export BUILD_NUMBER="15.1"
     export BUILD_URL="http://endpoint"
     export WORKSPACE="."
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=15.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=jenkins&flags=&pr=&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=15.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=jenkins&flags=&pr=&job="
 }
 
 function test_jenkins_blue (){
@@ -285,7 +285,7 @@ function test_jenkins_blue (){
     export BUILD_NUMBER="15.1"
     export BUILD_URL="http://endpoint"
     export WORKSPACE="."
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=15.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=jenkins&flags=&pr=1&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=15.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=jenkins&flags=&pr=1&job="
 }
 
 function test_bitrise (){
@@ -297,7 +297,7 @@ function test_bitrise (){
     export BITRISE_BUILD_NUMBER="15.1"
     export BITRISE_PULL_REQUEST="1"
     export BITRISE_BUILD_URL="http://endpoint"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=15.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=bitrise&flags=&pr=1&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=15.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=bitrise&flags=&pr=1&job="
 }
 
 function test_jenkins_vars (){
@@ -309,7 +309,7 @@ function test_jenkins_vars (){
     export BUILD_URL="http://endpoint"
     export WORKSPACE="."
     export ghprbPullId="5"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=15.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=jenkins&flags=&pr=5&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=15.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=jenkins&flags=&pr=5&job="
 }
 
 function test_codeship (){
@@ -320,7 +320,7 @@ function test_codeship (){
     export CI_BUILD_NUMBER="12.1"
     export CI_BUILD_URL="http://endpoint"
     export CI_COMMIT_ID="180c0d097354fc1a451da8a3be5aba255f2ffd9f"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=12.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=codeship&flags=&pr=&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=12.1&build_url=http%3A%2F%2Fendpoint&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=codeship&flags=&pr=&job="
 }
 
 
@@ -356,7 +356,7 @@ function test_solano (){
     export TDDIUM_TID="12311"
     export TDDIUM_PR_ID="false"
     export TDDIUM_CURRENT_COMMIT="180c0d097354fc1a451da8a3be5aba255f2ffd9f"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=12311&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=solano&flags=&pr=false&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=12311&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=solano&flags=&pr=false&job="
 }
 
 function test_drone (){
@@ -366,7 +366,7 @@ function test_drone (){
     export DRONE_BRANCH="develop"
     export DRONE_BUILD_NUMBER="7.5"
     export DRONE_BUILD_URL="http://drone"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=$_SHA&build=7.5&build_url=http%3A%2F%2Fdrone&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=drone.io&flags=&pr=&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=$_SHA&build=7.5&build_url=http%3A%2F%2Fdrone&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=drone.io&flags=&pr=&job="
 }
 
 function test_appveyor (){
@@ -402,7 +402,7 @@ function test_magnum (){
     export CI_BRANCH="develop"
     export CI_BUILD_NUMBER="12311"
     export CI_COMMIT="180c0d097354fc1a451da8a3be5aba255f2ffd9f"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=12311&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=magnum&flags=&pr=&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=12311&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=magnum&flags=&pr=&job="
 }
 
 function test_snap_ci (){
@@ -413,7 +413,7 @@ function test_snap_ci (){
     export SNAP_PIPELINE_COUNTER="12311"
     export SNAP_PULL_REQUEST_NUMBER="1"
     export SNAP_COMMIT="180c0d097354fc1a451da8a3be5aba255f2ffd9f"
-    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=12311&build_url=&name=&tag=&slug=codecov%2Fcodecov-bash&yaml=&service=snap&flags=&pr=1&job="
+    assertURL "https://codecov.io/upload/v4?package=bash-tbd&token=&branch=develop&commit=180c0d097354fc1a451da8a3be5aba255f2ffd9f&build=12311&build_url=&name=&tag=&slug=circleci%2Fcodecov-bash&yaml=&service=snap&flags=&pr=1&job="
 }
 
 function test_shippable (){
